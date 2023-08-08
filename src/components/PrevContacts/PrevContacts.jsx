@@ -1,21 +1,30 @@
-import React from 'react';
-import { Button, Contact, List } from './PrevContact.styled';
+import React, { useContext } from 'react';
+import { toast } from 'react-toastify';
+import { Button, Contact, List, Title } from './PrevContact.styled';
+import { MyContext } from 'context/MyContext';
 
 export const PrevContacts = () => {
-  const prevContacts = [
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ];
+  const hendleDeleteContact = contact => {
+    toast.error(
+      `You do not have access to delete this contact ${contact.name}! Please choose a non-default contact`
+    );
+  };
+  const prevContacts = useContext(MyContext);
   return (
     <div>
+      <Title>Default Contacts</Title>
       <List>
         {prevContacts.map(contact => (
           <Contact key={contact.id}>
             <p>{contact.name} : </p>
             <p>{contact.number}</p>
-            <Button>Saved</Button>
+            <Button
+              onClick={() => {
+                hendleDeleteContact(contact);
+              }}
+            >
+              Delete
+            </Button>
           </Contact>
         ))}
       </List>

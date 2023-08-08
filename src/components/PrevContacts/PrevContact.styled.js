@@ -27,3 +27,7 @@ export const Button = styled.button`
     background-color: #649eff;
   }
 `;
+export const Title = styled.h3`
+  text-align: center;
+  margin-bottom: 10px;
+`;
